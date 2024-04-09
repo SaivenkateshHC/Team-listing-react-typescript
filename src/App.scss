@@ -1,4 +1,18 @@
+@import './styles/variables.scss';
 
 * {
   font-family: 'Poppins', sans-serif;
+}
+
+.app{
+  .section-title{
+    color: var(--heading-text-color);
+    margin-bottom: 24px;
+  }
+  .grid-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 28px;
+
+  }
 }

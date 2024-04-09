@@ -8,5 +8,5 @@ export interface IUsers {
 
 enum Role {
     admin = 'admin',
-    user = 'user'
+    member = 'member'
 }
