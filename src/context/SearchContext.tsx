@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
 import useDebounce from "../hooks/useDebounce";
 import { IUsers } from "../utils/interfaces";
 
@@ -72,14 +72,6 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
       {children}
     </SearchContext.Provider>
   );
-};
-
-export const useSearch = () => {
-  const context = useContext(SearchContext);
-  if (context === undefined) {
-    throw new Error("useSearch must be used within a SearchProvider");
-  }
-  return context;
 };
 
 export default SearchContext;

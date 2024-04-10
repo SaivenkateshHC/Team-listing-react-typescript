@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.scss";
 import "./styles/bootstrap.scss";
 
@@ -9,8 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 // other imports
 import { IUsers } from "./utils/interfaces";
 import { FetchUserListApi } from "./services/DataFetching";
-import { useSearch } from "./context/SearchContext";
-
+import { useSearch } from "./hooks/useSearch";
 
 function App() {
   const { searchTerm,setUsers,filteredUsers } = useSearch();
@@ -35,7 +34,7 @@ function App() {
           members,
         });
       },
-      errorCallback: (error: any) => {
+      errorCallback: (error) => {
         console.log(error);
 
         setUsers({
