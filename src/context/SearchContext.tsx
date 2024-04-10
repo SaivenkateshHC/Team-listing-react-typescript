@@ -32,7 +32,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     members: [],
     admins: [],
   })
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000); // Debounce after 1000ms
+  const debouncedSearchTerm = useDebounce(searchTerm, 500); // Debounce after 500ms
 
   useEffect(() => {
     setFilteredUsers(users);
@@ -64,7 +64,10 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
         members: filteredMembers,
       });
       console.log("state call");
-    } 
+    } else{
+      setFilteredUsers(users);
+      console.log("state call");
+    }
   }, [debouncedSearchTerm]);
 
   return (
