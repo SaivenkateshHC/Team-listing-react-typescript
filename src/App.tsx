@@ -1,28 +1,26 @@
+import { useCallback, useEffect, useState } from "react";
 import "./App.scss";
 import "./styles/bootstrap.scss";
 
 //components
-import Navbar from "./components/Navbar/Navbar";
-import { useEffect, useState } from "react";
-import { IUsers } from "./utils/interfaces";
 import CustomCard from "./components/CustomCard/CustomCard";
-import { FetchUserListApi } from "./services/DataFetching";
+import Navbar from "./components/Navbar/Navbar";
 
-interface User {
-  admins: IUsers[] | [];
-  members: IUsers[] | [];
-}
+// other imports
+import { IUsers } from "./utils/interfaces";
+import { FetchUserListApi } from "./services/DataFetching";
+import { useSearch } from "./context/SearchContext";
+
 
 function App() {
-  const [users, setUsers] = useState<User>({
-    members: [],
-    admins: [],
-  });
+  const { searchTerm,setUsers,filteredUsers } = useSearch();
+
 
   useEffect(() => {
     fetchUsersList();
     return () => {};
   }, []);
+
 
   const fetchUsersList = async () => {
     FetchUserListApi({
@@ -52,20 +50,29 @@ function App() {
     <div className="app">
       <Navbar />
       <div className="container my-5 d-flex flex-column gap-5">
+        {searchTerm !== "" && <p>Results for "{searchTerm}"</p>}
         <div>
           <h3 className="section-title">Adminstrators</h3>
           <div className="grid-wrapper">
-            {users.admins.map((user: IUsers, index: number) => (
-              <CustomCard key={index} user={user} />
-            ))}
+            {filteredUsers.admins.length === 0 ? (
+              <div className="d-flex justify-content-center"><p>No Admins found</p></div>
+            ) : (
+              filteredUsers.admins.map((user: IUsers, index: number) => (
+                <CustomCard key={index} user={user} />
+              ))
+            )}
           </div>
         </div>
         <div>
           <h3 className="section-title">Members</h3>
           <div className="grid-wrapper">
-            {users.members.map((user: IUsers, index: number) => (
-              <CustomCard key={index} user={user} />
-            ))}
+            {filteredUsers.members.length === 0 ? (
+             <div className="d-flex justify-content-center"> <p>No Members found</p></div>
+            ) : (
+              filteredUsers.members.map((user: IUsers, index: number) => (
+                <CustomCard key={index} user={user} />
+              ))
+            )}
           </div>
         </div>
       </div>

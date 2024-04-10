@@ -1,18 +1,35 @@
-@import './styles/variables.scss';
+@import "./styles/variables.scss";
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-.app{
-  .section-title{
+.app {
+  .section-title {
     color: var(--heading-text-color);
     margin-bottom: 24px;
   }
-  .grid-wrapper{
+  .grid-wrapper {
     display: grid;
+
+    
+
+    @media screen and (max-width: 768px){
+      grid-template-columns: 1fr ;
+      gap: 16px;
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+      grid-template-columns: 1fr 1fr ;
+      gap: 20px;
+    }
+
+    @media screen and (min-width: 1025px) and (max-width: 1440px) {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 28px;
-
   }
 }
