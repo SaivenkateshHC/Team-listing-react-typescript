@@ -2,11 +2,10 @@ import { BaseSyntheticEvent } from "react";
 import "./Search.scss";
 
 import { FiSearch } from "react-icons/fi";
-import { useSearch } from "../../context/SearchContext";
+import { useSearch } from "../../hooks/useSearch";
 
 const Search = () => {
   const { searchTerm, setSearchTerm } = useSearch();
-
   const handleSearchChange = (event: BaseSyntheticEvent) => {
     setSearchTerm(event.target.value);
   };
